@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 15-sep-2017 0:05:55 by Hibernate Tools 5.2.5.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="jegab" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.jegab.persistenceEntities.TipoMovimiento" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="tipo_movimiento">
+        <id name="idtipoMovimiento" type="int">
+            <column name="idtipo_movimiento"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="nombre" not-null="true" unique="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="movimientos" optimistic-lock="true" sort="unsorted" table="movimiento">
+            <key on-delete="noaction">
+                <column name="fk_tipo_movimiento" not-null="true"/>
+            </key>
+            <one-to-many class="com.jegab.persistenceEntities.Movimiento" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3554/jegab</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">12345.1</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="hibernate.search.autoregister_listeners">true</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+		
+		<mapping resource="com/jegab/persistenceEntities/Categoria.hbm.xml" />
+		<mapping resource="com/jegab/persistenceEntities/TipoMovimiento.hbm.xml" />
+		<mapping resource="com/jegab/persistenceEntities/Producto.hbm.xml" />
+		<mapping resource="com/jegab/persistenceEntities/Movimiento.hbm.xml" />
+		
+		
+		
+	</session-factory>
+</hibernate-configuration>

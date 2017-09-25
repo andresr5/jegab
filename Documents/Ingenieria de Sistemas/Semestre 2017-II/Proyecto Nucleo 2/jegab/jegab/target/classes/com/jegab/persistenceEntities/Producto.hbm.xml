@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 16-sep-2017 14:15:10 by Hibernate Tools 5.2.5.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="jegab" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.jegab.persistenceEntities.Producto" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="producto">
+        <id name="idProducto" type="int">
+            <column name="idProducto"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="com.jegab.persistenceEntities.Categoria" embed-xml="true" fetch="select" insert="true" name="categoria" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="fk_categoria"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="nombre" not-null="true" unique="true"/>
+        </property>
+        <property generated="never" lazy="false" name="descripcion" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="descripcion" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="codigo" optimistic-lock="true" type="string" unique="false">
+            <column length="15" name="codigo" not-null="true" unique="true"/>
+        </property>
+        <property generated="never" lazy="false" name="precio" optimistic-lock="true" type="double" unique="false">
+            <column name="precio" not-null="true" precision="22" scale="0"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="movimientos" optimistic-lock="true" sort="unsorted" table="movimiento">
+            <key on-delete="noaction">
+                <column name="fk_producto" not-null="true"/>
+            </key>
+            <one-to-many class="com.jegab.persistenceEntities.Movimiento" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

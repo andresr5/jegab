@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 15-sep-2017 0:05:55 by Hibernate Tools 5.2.5.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="jegab" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.jegab.persistenceEntities.Movimiento" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="movimiento">
+        <id name="idmovimiento" type="int">
+            <column name="idmovimiento"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="com.jegab.persistenceEntities.Producto" embed-xml="true" fetch="select" insert="true" name="producto" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="fk_producto" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="com.jegab.persistenceEntities.TipoMovimiento" embed-xml="true" fetch="select" insert="true" name="tipoMovimiento" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="fk_tipo_movimiento" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="cantidad" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="cantidad" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="fecha" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="fecha" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="user" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="user" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

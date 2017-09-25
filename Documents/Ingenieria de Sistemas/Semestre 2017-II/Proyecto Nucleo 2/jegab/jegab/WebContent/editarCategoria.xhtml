@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Editar Categoria</title>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<p:growl id="growl" />
+		<p:dataTable var="categoria"
+			value="#{categoriaController.categoriaList}" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			id="dtCategoria">
+			<p:column headerText="Id categoria">
+				<h:outputText value="#{categoria.idCategoria}" />
+			</p:column>
+			<p:column headerText="Nombre">
+				<h:outputText value="#{categoria.nombre}" />
+			</p:column>
+			<p:column headerText="Descripción">
+				<h:outputText value="#{categoria.descripcion}" />
+			</p:column>
+			<p:column>
+				<p:commandButton update=":frmEditar:categoriaDetail"
+					oncomplete="PF('categoriaDialog').show();" icon="ui-icon-pencil"
+					title="Editar Categoria">
+					<f:setPropertyActionListener value="#{categoria}"
+						target="#{categoriaController.categoria}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	<p:dialog header="Información de Categoria" widgetVar="categoriaDialog"
+		modal="true" showEffect="fade" hideEffect="fade" resizable="true"
+		width="400" height="300">
+		<h:form id="frmEditar">
+			<p:outputPanel id="categoriaDetail" style="text-align:center;">
+				<p:panelGrid column="2"
+					rendered="#{not empty categoriaController.categoria}"
+					columnClasses="label,value">
+					<p:outputLabel value="Nombre: " />
+					<p:inputText value="#{categoriaController.categoria.nombre}" />
+					<p:outputLabel value="Descripción: " />
+					<p:inputText value="#{categoriaController.categoria.descripcion}" />
+					<p:commandButton value="Editar Categoria"
+						action="#{categoriaController.updateCategoria()}"
+						update=":form:growl :form:dtCategoria"
+						oncomplete="PF('categoriaDialog').hide();" />
+				</p:panelGrid>
+			</p:outputPanel>
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>
