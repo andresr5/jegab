@@ -25,7 +25,11 @@ import static org.hibernate.criterion.Example.create;
  * @author Hibernate Tools
  */
 public class CategoriaDAO {
-
+	
+	
+	
+	
+	
 	private static final Log log = LogFactory.getLog(CategoriaDAO.class);
 
 	private final SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml")
@@ -118,6 +122,14 @@ public class CategoriaDAO {
 
 	public Categoria findById(int id) {
 		log.debug("getting Categoria instance with id: " + id);
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = null;
+		if (!session.getTransaction().isActive()) {
+			tx = session.beginTransaction();
+		} else {
+			tx = session.getTransaction();
+		}
+		
 		try {
 			Categoria instance = (Categoria) sessionFactory.getCurrentSession().get("Categoria", id);
 			if (instance == null) {

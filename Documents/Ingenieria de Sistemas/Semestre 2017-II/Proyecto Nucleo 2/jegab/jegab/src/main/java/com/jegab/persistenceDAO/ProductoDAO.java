@@ -7,9 +7,13 @@ import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
+import com.jegab.persistenceEntities.Categoria;
 import com.jegab.persistenceEntities.Producto;
 
 import static org.hibernate.criterion.Example.create;
@@ -20,6 +24,8 @@ import static org.hibernate.criterion.Example.create;
  * @author Hibernate Tools
  */
 public class ProductoDAO {
+	
+	
 
 	private static final Log log = LogFactory.getLog(ProductoDAO.class);
 
@@ -117,6 +123,24 @@ public class ProductoDAO {
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
+		}
+	}
+	
+	public int getLastIdProducto(){
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = null;
+		if (!session.getTransaction().isActive()) {
+			tx = (Transaction) session.beginTransaction();
+		} else {
+			tx = (Transaction) session.getTransaction();
+		}
+		Query query = session.createQuery(" FROM Producto p ORDER BY p.idProducto DESC ");
+		List<Producto> productoList = query.list();
+		if (productoList.size() > 0) {
+			int productoId = productoList.get(0).getIdProducto();
+			return productoId;
+		} else {
+			return 0;
 		}
 	}
 }

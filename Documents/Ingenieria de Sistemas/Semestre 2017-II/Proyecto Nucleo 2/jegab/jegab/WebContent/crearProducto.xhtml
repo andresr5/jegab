@@ -12,14 +12,25 @@
 	</p:menubar>
 	<h:form>
 		<h:panelGrid columns="2"
-			style="position: absolute; top: 250px; left: 500px;" border="1">
-			<f:facet name="header">Crear Categoria</f:facet>
+			style="position: absolute; top: 250px; left: 700px;" border="1">
+			<f:facet name="header">Crear Producto </f:facet>
 			<h:outputText value="Nombre: " />
-			<p:inputText value="#{categoria.nombre}" />
+			<p:inputText value="#{producto.codigo}" />
 			<h:outputText value="Descripción: " />
-			<p:inputText value="#{categoria.descripcion}" />
+			<p:inputText value="#{producto.nombre}" />
+			<h:outputText value="Descripción: " />
+			<p:selectOneMenu id="productods"
+					value="#{productoController.categoriaSelectOneValue}"
+					style="width:150px">
+					<f:selectItem itemLabel="Seleccione una Categoria" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{productoController.categoriaList}" />
+				</p:selectOneMenu>
+		   <h:outputText value="Precio: " />
+		   <p:inputText value="#{producto.precio}" />
+			
 			<f:facet name="footer">
-				<p:commandButton value="Crear Categoria" action="#{categoriaController.crearCategoria(categoria)}"/>
+				<p:commandButton value="Crear Producto" action="#{productoController.crearProducto(producto)}"/>
 			</f:facet>
 		</h:panelGrid>
 	</h:form>
